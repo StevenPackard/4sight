@@ -4,12 +4,18 @@ import { BadRequest } from "../utils/Errors";
 class TasksService {
   async createComment(body) {
     let data = await dbContext.Tasks.findById(body.taskId);
-
     if (!data) {
       throw new BadRequest("Invalid Id");
     }
     // @ts-ignore
     data.comments.push(body);
+    data.save(function (err) {
+      if (err) {
+        throw new BadRequest("error errror errorororo");
+
+      };
+    });
+    return
   }
   async find(query = {}) {
     return await dbContext.Tasks.find(query);
