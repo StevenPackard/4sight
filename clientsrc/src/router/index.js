@@ -1,8 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
+// @ts-ignore
 import Home from "../views/Home.vue";
+// @ts-ignore
 import Boards from "../views/Boards.vue";
-import Board from "../views/ActiveBoard.vue";
+// @ts-ignore
+import ActiveBoard from "../views/ActiveBoard.vue";
 import { authGuard } from "@bcwdev/auth0-vue";
 
 Vue.use(Router);
@@ -21,9 +24,10 @@ export default new Router({
       beforeEnter: authGuard,
     },
     {
-      path: "/boards/:boardId",
-      name: "Activeboard",
-      component: Board,
+      path: "/boards/:id",
+      name: "ActiveBoard",
+      component: ActiveBoard,
+      beforeEnter: authGuard,
     },
     {
       path: "*",

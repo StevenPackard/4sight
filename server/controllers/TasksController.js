@@ -14,7 +14,8 @@ export class TasksController extends BaseController {
       .put("/:id", this.edit)
       .post("", this.create)
       .put("/:id/comments", this.createComment)
-      .delete("/:id", this.delete);
+      .delete("/:id", this.delete)
+      .put("/:id/comments/:commentId", this.deleteComment);
   }
   async getAll(req, res, next) {
     try {
@@ -58,6 +59,14 @@ export class TasksController extends BaseController {
       req.body.creatorEmail = req.userInfo.email;
       let data = await tasksService.createComment(req.body);
       return res.status(201).send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+  async deleteComment(req, res, next) {
+    try {
+      await tasksService.deleteComment(req.body);
+      return res.send("comment deleted");
     } catch (error) {
       next(error);
     }

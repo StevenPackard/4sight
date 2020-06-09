@@ -12,10 +12,9 @@ class TasksService {
     data.save(function (err) {
       if (err) {
         throw new BadRequest("error errror errorororo");
-
-      };
+      }
     });
-    return
+    return "Comment created";
   }
   async find(query = {}) {
     return await dbContext.Tasks.find(query);
@@ -45,6 +44,15 @@ class TasksService {
       throw new BadRequest("Invalid Id");
     }
     return data;
+  }
+  async deleteComment(comment) {
+    await dbContext.Tasks.findByIdAndUpdate(
+      { _id: comment.taskId },
+      { $pull: { comments: { _id: comment.id } } },
+      { new: true }
+    );
+    return "Comment Deleted";
+    // data.comments.pull({ id: comment.id });
   }
 }
 

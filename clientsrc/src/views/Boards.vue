@@ -1,16 +1,16 @@
 <template>
   <div class="boards container-fluid">
     <div class="row justify-content-center">
-      <form class="form-inline justify-content-center col-9" @submit.prevent="addBoard">
+      <form class="form-inline justify-content-center col-12 my-2" @submit.prevent="addBoard">
         <input
-          class="form-control wide"
+          class="form-control col-lg-3 mx-2"
           type="text"
           placeholder="title"
           v-model="newBoard.title"
           required
         />
         <input
-          class="form-control wide"
+          class="form-control col-lg-3 mx-2"
           type="text"
           placeholder="description"
           v-model="newBoard.description"
@@ -18,7 +18,9 @@
         <button class="btn btn-success" type="submit">Create Board</button>
       </form>
     </div>WELCOME TO THE BOARDS!!!
-    <board v-for="board in boards" :key="board.id" :board="board" />
+    <div class="row">
+      <board v-for="board in boards" :key="board.id" :board="board" />
+    </div>
   </div>
 </template>
 
