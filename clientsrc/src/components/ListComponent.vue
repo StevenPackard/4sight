@@ -1,7 +1,37 @@
 <template>
   <div class="list-component col-3 border list-tall m-2">
-    <h5>{{list.title}}</h5>
-    <button class="btn btn-outline-warning" @click="taskForm = !taskForm">Add Task</button>
+    <h5 v-if="!listForm">{{list.title}}</h5>
+    <form
+      v-if="listForm"
+      class="form-inline justify-content-center col-12 my-2"
+      @submit.prevent="editList"
+    >
+      <input
+        class="form-control col-lg-3 mx-2"
+        type="text"
+        placeholder="title"
+        v-model="list.title"
+        required
+      />
+      <button class="btn btn-warning" type="submit">edit</button>
+    </form>
+    <div class="dropdown">
+      <a
+        class="btn btn-secondary dropdown"
+        href="#"
+        role="button"
+        id="dropdownMenuLink"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >options</a>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" @click="taskForm = !taskForm" href="#">Add Task</a>
+        <a class="dropdown-item" @click="listForm = !listForm" href="#">Edit</a>
+        <a class="dropdown-item" @click="deleteList" href="#">Delete List</a>
+      </div>
+    </div>
     <form
       class="form-inline justify-content-center col-12 my-2"
       v-if="taskForm"
@@ -35,7 +65,8 @@ export default {
       taskForm: false,
       newTask: {
         listId: this.list.id
-      }
+      },
+      listForm: false
     };
   },
   computed: {
@@ -46,11 +77,18 @@ export default {
   },
   methods: {
     addTask() {
-      return this.$store.dispatch("addTask", { ...this.newTask });
+      this.$store.dispatch("addTask", { ...this.newTask });
       this.newTask = {
         listId: this.list.id
       };
       this.taskForm = false;
+    },
+    deleteList() {
+      this.$store.dispatch("deleteList", this.list);
+    },
+    editList() {
+      this.$store.dispatch("editList", this.list);
+      this.listForm = false;
     }
   },
   components: {

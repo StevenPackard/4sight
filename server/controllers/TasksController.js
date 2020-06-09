@@ -15,7 +15,8 @@ export class TasksController extends BaseController {
       .post("", this.create)
       .put("/:id/comments", this.createComment)
       .delete("/:id", this.delete)
-      .put("/:id/comments/:commentId", this.deleteComment);
+      .put("/:id/comments/:commentId", this.deleteComment)
+      .put("/:id/comments/:commentId/comment", this.editComment);
   }
   async getAll(req, res, next) {
     try {
@@ -67,6 +68,14 @@ export class TasksController extends BaseController {
     try {
       await tasksService.deleteComment(req.body);
       return res.send("comment deleted");
+    } catch (error) {
+      next(error);
+    }
+  }
+  async editComment(req, res, next) {
+    try {
+      let data = await tasksService.editComment(req.body);
+      return res.send(data);
     } catch (error) {
       next(error);
     }

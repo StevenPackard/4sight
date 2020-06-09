@@ -5,10 +5,14 @@
         <h1>{{board.title}}</h1>
       </div>
       <div class="col-7">
-        <button class="btn btn-outline-success">Add list</button>
+        <button @click="listForm= !listForm" class="btn btn-outline-success">Add list</button>
       </div>
       <div class="col-12">
-        <form class="form-inline justify-content-center col-12 my-2" @submit.prevent="addList">
+        <form
+          v-if="listForm"
+          class="form-inline justify-content-center col-12 my-2"
+          @submit.prevent="addList"
+        >
           <input
             class="form-control col-lg-3 mx-2"
             type="text"
@@ -38,7 +42,8 @@ export default {
     return {
       newList: {
         boardId: this.$route.params.id
-      }
+      },
+      listForm: false
     };
   },
   methods: {

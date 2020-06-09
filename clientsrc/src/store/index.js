@@ -87,6 +87,14 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async editBoard({ commit, dispatch }, board) {
+      try {
+        let res = await api.put("boards/" + board.id, board);
+        dispatch("getBoards");
+      } catch (error) {
+        console.error(error);
+      }
+    },
     //#endregion
 
     //#region -- LISTS --
@@ -102,6 +110,22 @@ export default new Vuex.Store({
       try {
         await api.post("lists", listDeetz);
         dispatch("getAllLists", listDeetz.boardId);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async editList({ commit, dispatch }, list) {
+      try {
+        await api.put("lists/" + list.id, list);
+        dispatch("getAllLists", list.boardId);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteList({ commit, dispatch }, list) {
+      try {
+        await api.delete("lists/" + list.id);
+        dispatch("getAllLists", list.boardId);
       } catch (error) {
         console.error(error);
       }
@@ -125,6 +149,22 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async editTask({ commit, dispatch }, task) {
+      try {
+        await api.put("tasks/" + task.id, task);
+        dispatch("getTasksByListId", task.listId);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteTask({ commit, dispatch }, task) {
+      try {
+        await api.delete("tasks/" + task.id);
+        dispatch("getTasksByListId", task.listId);
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async addComment({ commit, dispatch }, commentDeetz) {
       try {
         await api.put(
@@ -132,6 +172,17 @@ export default new Vuex.Store({
           commentDeetz
         );
         dispatch("getTasksByListId", commentDeetz.listId);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async editComment({ commit, dispatch }, comment) {
+      try {
+        await api.put(
+          "tasks/" + comment.taskId + "/comments/" + comment.id + "/comment",
+          comment
+        );
+        dispatch("getTasksByListId", comment.listId);
       } catch (error) {
         console.error(error);
       }
@@ -147,6 +198,7 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+
     //#endregion
   },
 });

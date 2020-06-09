@@ -38,6 +38,7 @@ class TasksService {
     }
     return data;
   }
+
   async delete(id) {
     let data = await dbContext.Tasks.findByIdAndDelete(id);
     if (!data) {
@@ -53,6 +54,13 @@ class TasksService {
     );
     return "Comment Deleted";
     // data.comments.pull({ id: comment.id });
+  }
+  async editComment(comment) {
+    await dbContext.Tasks.findByIdAndUpdate(
+      { _id: comment.taskId },
+      { $set: { comments: { _id: comment.id } }, comment },
+      { new: true }
+    );
   }
 }
 
