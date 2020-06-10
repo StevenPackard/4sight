@@ -12,7 +12,7 @@ export class BoardsController extends BaseController {
     this.router
       .use(auth0provider.getAuthorizedUserInfo)
       .get("", this.getAll)
-      .get("/collabs", this.getAllCollabBoards)
+      // .get("/collabs", this.getAllCollabBoards)
       .get("/:id", this.getById)
       .get("/:id/lists", this.getListsByBoardId)
       .get("/:id/tasks", this.getTasksByBoardId)
@@ -32,14 +32,14 @@ export class BoardsController extends BaseController {
       next(err);
     }
   }
-  async getAllCollabBoards(req, res, next) {
-    try {
-      let data = await boardService.getAllCollabBoards(req.userInfo.email);
-      return res.send(data);
-    } catch (err) {
-      next(err);
-    }
-  }
+  // async getAllCollabBoards(req, res, next) {
+  //   try {
+  //     let data = await boardService.getAllCollabBoards(req.userInfo.email);
+  //     return res.send(data);
+  //   } catch (err) {
+  //     next(err);
+  //   }
+  // }
   async getById(req, res, next) {
     try {
       let data = await boardService.getById(req.params.id, req.userInfo.email);
@@ -69,6 +69,7 @@ export class BoardsController extends BaseController {
   async create(req, res, next) {
     try {
       req.body.creatorEmail = req.userInfo.email;
+      req.body.collaborators = req.userInfo.email;
       let data = await boardService.create(req.body);
       return res.status(201).send(data);
     } catch (error) {

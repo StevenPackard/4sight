@@ -34,8 +34,8 @@ import Board from "@/components/BoardComponent.vue";
 export default {
   name: "boards",
   mounted() {
-    this.$store.dispatch("getCollabBoards");
     this.$store.dispatch("getBoards");
+    // this.$store.dispatch("getCollabBoards");
   },
   data() {
     return {

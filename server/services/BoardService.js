@@ -3,17 +3,17 @@ import { BadRequest } from "../utils/Errors";
 
 class BoardService {
   async getAll(userEmail) {
-    return await dbContext.Boards.find({ creatorEmail: userEmail }).populate(
-      "creator",
-      "name picture"
-    );
-  }
-  async getAllCollabBoards(userEmail) {
     return await dbContext.Boards.find({ collaborators: userEmail }).populate(
       "creator",
       "name picture"
     );
   }
+  // async getAllCollabBoards(userEmail) {
+  //   return await dbContext.Boards.find({ collaborators: userEmail }).populate(
+  //     "creator",
+  //     "name picture"
+  //   );
+  // }
 
   async getById(id, userEmail) {
     let data = await dbContext.Boards.findOne({
