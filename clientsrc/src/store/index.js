@@ -100,6 +100,24 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async addCollab({ commit, dispatch }, data) {
+      try {
+        let res = await api.put("boards/" + data.boardId + "/collab", data);
+        dispatch("getBoards");
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteCollab({ commit, dispatch }, collab) {
+      try {
+        let res = await api.delete(
+          "boards/" + collab.boardId + "/collab/" + collab._id
+        );
+        dispatch("getBoards");
+      } catch (error) {
+        console.error(error);
+      }
+    },
     //#endregion
 
     //#region -- LISTS --
