@@ -46,8 +46,7 @@ class TasksService {
       { $pull: { comments: { _id: commentId } } },
       { new: true }
     );
-    return "Comment Deleted";
-    // data.comments.pull({ id: comment.id });
+    return "Comment eleted";
   }
   async editComment(comment) {
     await dbContext.Tasks.findOneAndUpdate(
@@ -55,6 +54,7 @@ class TasksService {
       { $set: { "comments.$": comment } },
       { new: true }
     );
+    return "Comment updated";
   }
 }
 
