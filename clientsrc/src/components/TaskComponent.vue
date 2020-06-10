@@ -55,7 +55,7 @@
     </div>
     <div class="row" v-if="moveTaskForm">
       <div
-        class="border col-12 bg-warning"
+        class="border col-12 bg-warning action my-1"
         v-for="list in lists"
         :key="list.id"
         @click="moveTask({id: list.id, boardId: list.boardId})"
@@ -121,4 +121,7 @@ export default {
 
 
 <style scoped>
+.action {
+  cursor: pointer;
+}
 </style>
