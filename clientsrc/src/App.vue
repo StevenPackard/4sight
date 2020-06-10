@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" class="app-grow">
     <navbar />
-    <router-view />
+    <router-view class="grow" />
   </div>
 </template>
 
@@ -50,5 +50,16 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+</style>
+<style>
+.app-grow {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: scroll;
+}
+.grow {
+  flex-grow: 1;
 }
 </style>

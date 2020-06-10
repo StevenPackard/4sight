@@ -1,5 +1,5 @@
 <template>
-  <div class="list-component col-3 border list-tall bg-info m-2">
+  <div class="list-component col-2 border list-tall bg-info my-2 mx-4 d-inline-block">
     <h5 v-if="!listForm">{{list.title}}</h5>
     <form
       v-if="listForm"
@@ -46,7 +46,7 @@
       />
       <button class="btn btn-success" type="submit">+</button>
     </form>
-    <div class="row">
+    <div class="row tall-row">
       <task v-for="task in tasks" :key="task.id" :task="task" />
     </div>
   </div>
@@ -101,6 +101,12 @@ export default {
 
 <style scoped>
 .list-tall {
-  min-height: 40vh;
+  min-height: 50vh;
+}
+.tall-row {
+  max-height: 100vh;
+}
+.inline-display {
+  display: inline-block;
 }
 </style>
