@@ -1,5 +1,5 @@
 <template>
-  <div class="board container">
+  <div class="board container-fluid">
     <div class="row justify-content-center">
       <div class="col-7">
         <h1>{{board.title}}</h1>
@@ -24,7 +24,7 @@
         </form>
       </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row scrolling-wrapper-flexbox mx-2">
       <list v-for="list in lists" :key="list.id" :list="list" />
     </div>
   </div>
@@ -68,3 +68,10 @@ export default {
   props: ["boardId"]
 };
 </script>
+<style>
+.scrolling-wrapper-flexbox {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+</style>

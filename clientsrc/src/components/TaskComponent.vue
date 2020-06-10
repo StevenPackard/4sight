@@ -58,7 +58,7 @@
         class="border col-12 bg-warning action my-1"
         v-for="list in lists"
         :key="list.id"
-        @click="moveTask({id: list.id, boardId: list.boardId})"
+        @click="moveTask({id: list.id})"
       >{{list.title}}</div>
     </div>
   </div>
