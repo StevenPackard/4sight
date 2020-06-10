@@ -17,7 +17,12 @@
         />
         <button class="btn btn-success" type="submit">Create Board</button>
       </form>
-    </div>WELCOME TO THE BOARDS!!!
+    </div>
+    <div class="row">
+      <div class="col text-light">
+        <h5>{{profile.name}}'s Boards</h5>
+      </div>
+    </div>
     <div class="row">
       <board v-for="board in boards" :key="board.id" :board="board" />
     </div>
@@ -42,6 +47,9 @@ export default {
   computed: {
     boards() {
       return this.$store.state.boards;
+    },
+    profile() {
+      return this.$store.state.user;
     }
   },
   methods: {

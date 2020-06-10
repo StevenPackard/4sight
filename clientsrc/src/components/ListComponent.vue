@@ -1,51 +1,53 @@
 <template>
-  <div class="list-component col-2 border list-tall bg-info my-2 mx-4 d-inline-block">
-    <h5 v-if="!listForm">{{list.title}}</h5>
-    <form
-      v-if="listForm"
-      class="form-inline justify-content-center col-12 my-2"
-      @submit.prevent="editList"
-    >
-      <input
-        class="form-control col-lg-3 mx-2"
-        type="text"
-        placeholder="title"
-        v-model="list.title"
-        required
-      />
-      <button class="btn btn-warning" type="submit">edit</button>
-    </form>
-    <div class="dropdown">
-      <a
-        class="btn btn-secondary dropdown mb-1"
-        href="#"
-        role="button"
-        id="dropdownMenuLink"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >...</a>
+  <div
+    class="list-component col-md-2 col-11 border list-tall bg-info my-2 mx-4 d-inline-block rounded shadow"
+  >
+    <div class="row justify-content-between">
+      <h4 class="col-8 mt-2 text-right" v-if="!listForm">{{list.title}}</h4>
+      <form v-if="listForm" class="form-inline col-12 my-2" @submit.prevent="editList">
+        <input
+          class="form-control col-md-9 mx-2"
+          type="text"
+          placeholder="title"
+          v-model="list.title"
+          required
+        />
+        <button class="btn btn-warning" type="submit">edit</button>
+      </form>
+      <div v-if="!listForm" class="dropdown col-2 mr-2 mt-1">
+        <a
+          class="btn btn-secondary dropdown mb-1"
+          href="#"
+          role="button"
+          id="dropdownMenuLink"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >...</a>
 
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" @click="taskForm = !taskForm" href="#">Add Task</a>
-        <a class="dropdown-item" @click="listForm = !listForm" href="#">Edit</a>
-        <a class="dropdown-item" @click="deleteList" href="#">Delete List</a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" @click="taskForm = !taskForm" href="#">Add Task</a>
+          <a class="dropdown-item" @click="listForm = !listForm" href="#">Edit</a>
+          <a class="dropdown-item" @click="deleteList" href="#">Delete List</a>
+        </div>
       </div>
     </div>
-    <form
-      class="form-inline justify-content-center col-12 my-2"
-      v-if="taskForm"
-      @submit.prevent="addTask"
-    >
-      <input
-        class="form-control col-lg-8 mx-2"
-        type="text"
-        placeholder="title"
-        v-model="newTask.title"
-        required
-      />
-      <button class="btn btn-success" type="submit">+</button>
-    </form>
+    <div class="row">
+      <form
+        class="form-inline justify-content-center col-12 my-2"
+        v-if="taskForm"
+        @submit.prevent="addTask"
+      >
+        <input
+          class="form-control col-lg-8 mx-2"
+          type="text"
+          placeholder="title"
+          v-model="newTask.title"
+          required
+        />
+        <button class="btn btn-success" type="submit">+</button>
+      </form>
+    </div>
     <div class="row tall-row">
       <task v-for="task in tasks" :key="task.id" :task="task" />
     </div>

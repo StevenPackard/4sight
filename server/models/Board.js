@@ -25,8 +25,6 @@ Board.pre("findOneAndRemove", function (next) {
   Promise.all([
     // @ts-ignore
     dbContext.Lists.deleteMany({ boardId: this._conditions._id }),
-    // @ts-ignore
-    dbContext.Tasks.deleteMany({ boardId: this._conditions._id }),
   ])
     .then(() => next())
     .catch((err) => next(err));

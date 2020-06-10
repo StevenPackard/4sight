@@ -1,6 +1,26 @@
 <template>
-  <div class="task-component col-12 border-top border-bottom bg-danger">
-    <h3 v-if="!taskForm">{{task.title}}</h3>
+  <div class="task-component col-12 border-top border-bottom bg-teal">
+    <div class="row">
+      <h5 class="col-10 mt-4" v-if="!taskForm">{{task.title}}</h5>
+      <div v-if="!taskForm" class="dropdown col-2 mt-1 px-0">
+        <a
+          class="btn btn-secondary dropdown"
+          href="#"
+          role="button"
+          id="dropdownMenuLink"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >...</a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" @click="commentForm = !commentForm" href="#">Add Comment</a>
+          <a class="dropdown-item" @click="taskForm = !taskForm" href="#">Edit</a>
+          <a class="dropdown-item" @click="deleteTask" href="#">Delete Task</a>
+          <a class="dropdown-item" @click="moveTaskForm = !moveTaskForm" href="#">MoveTask</a>
+        </div>
+      </div>
+    </div>
     <form
       class="form-inline justify-content-center col-12 my-2"
       v-if="taskForm"
@@ -15,24 +35,6 @@
       />
       <button class="btn btn-success" type="submit">+</button>
     </form>
-    <div class="dropdown">
-      <a
-        class="btn btn-secondary dropdown"
-        href="#"
-        role="button"
-        id="dropdownMenuLink"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >...</a>
-
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" @click="commentForm = !commentForm" href="#">Add Comment</a>
-        <a class="dropdown-item" @click="taskForm = !taskForm" href="#">Edit</a>
-        <a class="dropdown-item" @click="deleteTask" href="#">Delete Task</a>
-        <a class="dropdown-item" @click="moveTaskForm = !moveTaskForm" href="#">MoveTask</a>
-      </div>
-    </div>
     <form
       class="form-inline justify-content-center col-12 my-2"
       v-if="commentForm"
@@ -49,9 +51,9 @@
     </form>
 
     <div class="row">
-      <ol class="col-10 offset-1">
+      <div class="col-12">
         <comment v-for="comment in comments" :key="comment.id" :comment="comment" />
-      </ol>
+      </div>
     </div>
     <div class="row" v-if="moveTaskForm">
       <div
@@ -123,5 +125,8 @@ export default {
 <style scoped>
 .action {
   cursor: pointer;
+}
+.bg-teal {
+  background-color: #00bc8c;
 }
 </style>

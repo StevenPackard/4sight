@@ -1,6 +1,6 @@
 <template>
   <div class="col-4 board my-2">
-    <div class="card">
+    <div class="card bg-light">
       <router-link class="test" :to="{name: 'ActiveBoard', params: {id: board.id}}">
         <div class="card-body">
           <h4 class="card-title">{{board.title}}</h4>
