@@ -95,6 +95,7 @@ export default new Vuex.Store({
       try {
         let res = await api.put("boards/" + board.id, board);
         dispatch("getBoards");
+        dispatch("getActiveBoard", board.id);
       } catch (error) {
         console.error(error);
       }
