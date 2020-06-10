@@ -12,13 +12,14 @@ export class BoardsController extends BaseController {
     this.router
       .use(auth0provider.getAuthorizedUserInfo)
       .get("", this.getAll)
+      .get("/collabs", this.getAllCollabBoards)
       .get("/:id", this.getById)
       .get("/:id/lists", this.getListsByBoardId)
       .get("/:id/tasks", this.getTasksByBoardId)
       .post("", this.create)
       .put("/:id", this.edit)
       .put("/:id/collab", this.addCollab)
-      .delete("/:id/collab/:collabId", this.deleteCollab)
+      .put("/:id/deleteCollab", this.deleteCollab)
       .delete("/:id", this.delete);
   }
 
@@ -31,7 +32,14 @@ export class BoardsController extends BaseController {
       next(err);
     }
   }
-
+  async getAllCollabBoards(req, res, next) {
+    try {
+      let data = await boardService.getAllCollabBoards(req.userInfo.email);
+      return res.send(data);
+    } catch (err) {
+      next(err);
+    }
+  }
   async getById(req, res, next) {
     try {
       let data = await boardService.getById(req.params.id, req.userInfo.email);
@@ -103,7 +111,7 @@ export class BoardsController extends BaseController {
   }
   async deleteCollab(req, res, next) {
     try {
-      await boardService.deleteCollab(req.params.id, req.params.collabId);
+      await boardService.deleteCollab(req.params.id, req.body);
       return res.send("successfully deleted");
     } catch (error) {
       next(error);

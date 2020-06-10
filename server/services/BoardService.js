@@ -8,6 +8,12 @@ class BoardService {
       "name picture"
     );
   }
+  async getAllCollabBoards(userEmail) {
+    return await dbContext.Boards.find({ collaborators: userEmail }).populate(
+      "creator",
+      "name picture"
+    );
+  }
 
   async getById(id, userEmail) {
     let data = await dbContext.Boards.findOne({
@@ -39,15 +45,15 @@ class BoardService {
   async addCollab(id, userEmail, update) {
     await dbContext.Boards.findOneAndUpdate(
       { _id: id, creatorEmail: userEmail },
-      { $addToSet: { collaborators: update } },
+      { $addToSet: { collaborators: update.email } },
       { new: true }
     );
     return "collab Added";
   }
-  async deleteCollab(id, collabId) {
+  async deleteCollab(id, data) {
     await dbContext.Boards.findOneAndUpdate(
       { _id: id },
-      { $pull: { collaborators: { _id: collabId } } }
+      { $pull: { collaborators: data.collab } }
     );
   }
 
