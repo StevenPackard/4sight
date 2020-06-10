@@ -12,11 +12,11 @@ export class TasksController extends BaseController {
       .get("", this.getAll)
       .get("/:id", this.getById)
       .put("/:id", this.edit)
+      .put("/:id/comments/:commentId", this.editComment)
       .post("", this.create)
-      .put("/:id/comments", this.createComment)
+      .post("/:id/comments", this.createComment)
       .delete("/:id", this.delete)
-      .put("/:id/comments/:commentId", this.deleteComment)
-      .put("/:id/comments/:commentId/comment", this.editComment);
+      .delete("/:id/comments/:commentId", this.deleteComment);
   }
   async getAll(req, res, next) {
     try {
@@ -58,7 +58,7 @@ export class TasksController extends BaseController {
     try {
       // NOTE NEVER TRUST THE CLIENT TO ADD THE CREATOR ID
       req.body.creatorEmail = req.userInfo.email;
-      let data = await tasksService.createComment(req.body);
+      let data = await tasksService.createComment(req.params.id, req.body);
       return res.status(201).send(data);
     } catch (error) {
       next(error);
@@ -66,7 +66,7 @@ export class TasksController extends BaseController {
   }
   async deleteComment(req, res, next) {
     try {
-      await tasksService.deleteComment(req.body);
+      await tasksService.deleteComment(req.params.id, req.params.commentId);
       return res.send("comment deleted");
     } catch (error) {
       next(error);

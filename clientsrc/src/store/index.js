@@ -167,7 +167,7 @@ export default new Vuex.Store({
     },
     async addComment({ commit, dispatch }, commentDeetz) {
       try {
-        await api.put(
+        await api.post(
           "tasks/" + commentDeetz.taskId + "/comments",
           commentDeetz
         );
@@ -179,7 +179,7 @@ export default new Vuex.Store({
     async editComment({ commit, dispatch }, comment) {
       try {
         await api.put(
-          "tasks/" + comment.taskId + "/comments/" + comment.id + "/comment",
+          "tasks/" + comment.taskId + "/comments/" + comment.id,
           comment
         );
         dispatch("getTasksByListId", comment.listId);
@@ -189,10 +189,7 @@ export default new Vuex.Store({
     },
     async deleteComment({ commit, dispatch }, comment) {
       try {
-        await api.put(
-          "tasks/" + comment.taskId + "/comments/" + comment.id,
-          comment
-        );
+        await api.delete("tasks/" + comment.taskId + "/comments/" + comment.id);
         dispatch("getTasksByListId", comment.listId);
       } catch (error) {
         console.error(error);
