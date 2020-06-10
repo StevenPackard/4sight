@@ -3,17 +3,12 @@ import { dbContext } from "../db/DbContext";
 let Schema = mongoose.Schema;
 let ObjectId = Schema.Types.ObjectId;
 
-const CollabSchema = new Schema({
-  email: { type: String, required: true },
-  boardId: { type: ObjectId, ref: "Board", required: true },
-});
-
 const Board = new Schema(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
     creatorEmail: { type: String, required: true },
-    collaborators: [CollabSchema],
+    collaborators: [{ type: String }],
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );

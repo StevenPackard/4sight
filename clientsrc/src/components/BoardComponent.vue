@@ -52,7 +52,12 @@
       </div>
       <div class="row">
         <div v-if="showCollab" class="col">
-          <collab v-for="collab in collabs" :key="collab.email" :collab="collab" />
+          <collab
+            v-for="collab in collabs"
+            :key="collab.email"
+            :collab="collab"
+            :boardId="board.id"
+          />
         </div>
       </div>
     </div>
@@ -63,12 +68,13 @@
 import collab from "@/components/CollaboratorsComponent";
 export default {
   name: "Board",
+  mounted() {},
   data() {
     return {
       editForm: false,
       collabForm: false,
       newCollab: {
-        boardId: this.board.id
+        id: this.board.id
       },
       showCollab: false
     };
@@ -82,10 +88,18 @@ export default {
       this.editForm = false;
     },
     addCollab() {
-      this.$store.dispatch("addCollab", { ...this.newCollab });
-      this.newCollab = {
-        boardId: this.board.id
-      };
+      if (this.collabs != this.newCollab.email) {
+        this.$store.dispatch("addCollab", { ...this.newCollab });
+        this.newCollab = {
+          id: this.board.id
+        };
+        this.collabForm = false;
+      } else {
+        this.collabForm = false;
+        this.newCollab = {
+          id: this.board.id
+        };
+      }
     }
   },
   components: {

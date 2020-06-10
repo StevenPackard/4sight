@@ -45,6 +45,9 @@ export default new Vuex.Store({
     setAllTasks(state, tasks) {
       state.allTasks = tasks;
     },
+    setCollabBoards(state, boards) {
+      state.boards.push(boards);
+    },
   },
   actions: {
     //#region -- AUTH STUFF --
@@ -69,6 +72,10 @@ export default new Vuex.Store({
       api.get("boards").then((res) => {
         commit("setBoards", res.data);
       });
+    },
+    async getCollabBoards({ commit, dispatch }) {
+      let res = await api.get("boards/collabs");
+      commit("setCollabBoards", res.data);
     },
     addBoard({ commit, dispatch }, boardData) {
       api.post("boards", boardData).then((serverBoard) => {
@@ -102,16 +109,17 @@ export default new Vuex.Store({
     },
     async addCollab({ commit, dispatch }, data) {
       try {
-        let res = await api.put("boards/" + data.boardId + "/collab", data);
+        let res = await api.put("boards/" + data.id + "/collab", data);
         dispatch("getBoards");
       } catch (error) {
         console.error(error);
       }
     },
-    async deleteCollab({ commit, dispatch }, collab) {
+    async deleteCollab({ commit, dispatch }, data) {
       try {
-        let res = await api.delete(
-          "boards/" + collab.boardId + "/collab/" + collab._id
+        let res = await api.put(
+          "boards/" + data.boardId + "/deleteCollab",
+          data
         );
         dispatch("getBoards");
       } catch (error) {
