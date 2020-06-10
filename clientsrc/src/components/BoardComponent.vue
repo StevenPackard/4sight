@@ -9,8 +9,10 @@
         </div>
       </router-link>
       <div class="row justify-content-center mb-2">
-        <button class="btn btn-danger mr-2 col-5" @click="deleteBoard">Delete Board</button>
-        <button @click="editForm = !editForm" class="btn btn-warning ml-2 col-5">edit</button>
+        <button class="btn btn-danger col-3" @click="deleteBoard">Delete Board</button>
+        <button @click="editForm = !editForm" class="btn btn-warning col-3 ml-3 mr-3">edit</button>
+        <button @click="collabForm = !collabForm" class="btn btn-info col-3">Add Collaborators</button>
+        <button @click="showCollab = !showCollab" class="btn btn-danger">show collab</button>
       </div>
       <div class="row">
         <form
@@ -33,17 +35,42 @@
           />
           <button class="btn btn-success" type="submit">+</button>
         </form>
+        <form
+          v-if="collabForm"
+          class="form-inline justify-content-center col-12 my-2"
+          @submit.prevent="addCollab"
+        >
+          <input
+            class="form-control col-lg-9 mx-2"
+            type="email"
+            placeholder="Collaborator email..."
+            v-model="newCollab.email"
+            required
+          />
+          <button class="btn btn-success" type="submit">+</button>
+        </form>
+      </div>
+      <div class="row">
+        <div v-if="showCollab" class="col">
+          <collab v-for="collab in collabs" :key="collab.email" :collab="collab" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import collab from "@/components/CollaboratorsComponent";
 export default {
   name: "Board",
   data() {
     return {
-      editForm: false
+      editForm: false,
+      collabForm: false,
+      newCollab: {
+        boardId: this.board.id
+      },
+      showCollab: false
     };
   },
   methods: {
@@ -53,6 +80,20 @@ export default {
     editBoard() {
       this.$store.dispatch("editBoard", this.board);
       this.editForm = false;
+    },
+    addCollab() {
+      this.$store.dispatch("addCollab", { ...this.newCollab });
+      this.newCollab = {
+        boardId: this.board.id
+      };
+    }
+  },
+  components: {
+    collab
+  },
+  computed: {
+    collabs() {
+      return this.board.collaborators;
     }
   },
   props: ["board"]

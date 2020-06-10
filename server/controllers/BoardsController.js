@@ -17,6 +17,8 @@ export class BoardsController extends BaseController {
       .get("/:id/tasks", this.getTasksByBoardId)
       .post("", this.create)
       .put("/:id", this.edit)
+      .put("/:id/collab", this.addCollab)
+      .delete("/:id/collab/:collabId", this.deleteCollab)
       .delete("/:id", this.delete);
   }
 
@@ -78,11 +80,31 @@ export class BoardsController extends BaseController {
       next(error);
     }
   }
+  async addCollab(req, res, next) {
+    try {
+      let data = await boardService.addCollab(
+        req.params.id,
+        req.userInfo.email,
+        req.body
+      );
+      return res.send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
 
   async delete(req, res, next) {
     try {
       await boardService.delete(req.params.id, req.userInfo.email);
       return res.send("Successfully deleted");
+    } catch (error) {
+      next(error);
+    }
+  }
+  async deleteCollab(req, res, next) {
+    try {
+      await boardService.deleteCollab(req.params.id, req.params.collabId);
+      return res.send("successfully deleted");
     } catch (error) {
       next(error);
     }
