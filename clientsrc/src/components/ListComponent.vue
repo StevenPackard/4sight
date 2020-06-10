@@ -1,5 +1,5 @@
 <template>
-  <div class="list-component col-3 border list-tall m-2">
+  <div class="list-component col-3 border list-tall bg-info m-2">
     <h5 v-if="!listForm">{{list.title}}</h5>
     <form
       v-if="listForm"
@@ -17,14 +17,14 @@
     </form>
     <div class="dropdown">
       <a
-        class="btn btn-secondary dropdown"
+        class="btn btn-secondary dropdown mb-1"
         href="#"
         role="button"
         id="dropdownMenuLink"
         data-toggle="dropdown"
         aria-haspopup="true"
         aria-expanded="false"
-      >options</a>
+      >...</a>
 
       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
         <a class="dropdown-item" @click="taskForm = !taskForm" href="#">Add Task</a>
@@ -102,6 +102,5 @@ export default {
 <style scoped>
 .list-tall {
   min-height: 40vh;
-  background-color: rgb(125, 125, 207);
 }
 </style>

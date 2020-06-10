@@ -17,14 +17,14 @@
     </form>
     <div class="dropdown">
       <a
-        class="btn btn-secondary dropdown"
+        class="btn btn-secondary dropdown mb-1 bg-primary"
         href="#"
         role="button"
         id="dropdownMenuLink"
         data-toggle="dropdown"
         aria-haspopup="true"
         aria-expanded="false"
-      >options</a>
+      >...</a>
 
       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
         <a class="dropdown-item" @click="commentForm = !commentForm" href="#">Edit</a>
