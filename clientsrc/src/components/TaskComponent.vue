@@ -1,23 +1,26 @@
 <template>
   <div class="task-component col-12 border-top border-bottom bg-teal">
     <div class="row">
-      <h5 class="col-10 mt-4" v-if="!taskForm">{{task.title}}</h5>
-      <div v-if="!taskForm" class="dropdown col-2 mt-1 px-0">
+      <div v-if="!taskForm" class="dropdown col-12 mt-1 px-0">
         <a
-          class="btn btn-secondary dropdown"
+          class="btn dropdown dropdown-toggle text-dark"
           href="#"
           role="button"
           id="dropdownMenuLink"
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
-        >...</a>
+        >{{task.title}}</a>
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" @click="commentForm = !commentForm" href="#">Add Comment</a>
-          <a class="dropdown-item" @click="taskForm = !taskForm" href="#">Edit</a>
-          <a class="dropdown-item" @click="deleteTask" href="#">Delete Task</a>
-          <a class="dropdown-item" @click="moveTaskForm = !moveTaskForm" href="#">MoveTask</a>
+        <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenuLink">
+          <a
+            class="dropdown-item text-dark"
+            @click="commentForm = !commentForm"
+            href="#"
+          >Add Comment</a>
+          <a class="dropdown-item text-dark" @click="taskForm = !taskForm" href="#">Edit</a>
+          <a class="dropdown-item text-dark" @click="deleteTask" href="#">Delete Task</a>
+          <a class="dropdown-item text-dark" @click="moveTaskForm = !moveTaskForm" href="#">MoveTask</a>
         </div>
       </div>
     </div>
@@ -49,19 +52,18 @@
       />
       <button class="btn btn-success" type="submit">+</button>
     </form>
-
-    <div class="row">
-      <div class="col-12">
-        <comment v-for="comment in comments" :key="comment.id" :comment="comment" />
-      </div>
-    </div>
-    <div class="row" v-if="moveTaskForm">
+    <div class="row justify-content-center" v-if="moveTaskForm">
       <div
-        class="border col-12 bg-warning action my-1"
+        class="border col-8 bg-orange action my-1"
         v-for="list in lists"
         :key="list.id"
         @click="moveTask({id: list.id})"
       >{{list.title}}</div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <comment v-for="comment in comments" :key="comment.id" :comment="comment" />
+      </div>
     </div>
   </div>
 </template>
@@ -128,5 +130,8 @@ export default {
 }
 .bg-teal {
   background-color: #00bc8c;
+}
+.bg-orange {
+  background-color: #fd7e14;
 }
 </style>

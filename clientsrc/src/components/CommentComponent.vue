@@ -1,17 +1,16 @@
 <template>
   <div class="comment-component bg-warning border my-1">
     <div class="row">
-      <h5 class v-if="!commentForm">{{comment.title}}</h5>
-      <div class="dropdown">
+      <div v-if="!commentForm" class="dropdown mt-1 col-12">
         <a
-          class="btn btn-secondary dropdown mb-1 bg-primary"
+          class="btn dropdown dropdown-toggle text-dark"
           href="#"
           role="button"
           id="dropdownMenuLink"
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
-        >...</a>
+        >{{comment.title}}</a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item" @click="commentForm = !commentForm" href="#">Edit</a>

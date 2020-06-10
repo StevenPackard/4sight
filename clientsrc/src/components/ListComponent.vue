@@ -3,7 +3,6 @@
     class="list-component col-md-2 col-11 border list-tall bg-info my-2 mx-4 d-inline-block rounded shadow"
   >
     <div class="row justify-content-between">
-      <h4 class="col-8 mt-2 text-right" v-if="!listForm">{{list.title}}</h4>
       <form v-if="listForm" class="form-inline col-12 my-2" @submit.prevent="editList">
         <input
           class="form-control col-md-9 mx-2"
@@ -12,18 +11,18 @@
           v-model="list.title"
           required
         />
-        <button class="btn btn-warning" type="submit">edit</button>
+        <button class="btn" type="submit">edit</button>
       </form>
-      <div v-if="!listForm" class="dropdown col-2 mr-2 mt-1">
+      <div v-if="!listForm" class="dropdown col-12 mr-2 mt-1">
         <a
-          class="btn btn-secondary dropdown mb-1"
+          class="btn dropdown dropdown-toggle text-dark mb-1"
           href="#"
           role="button"
           id="dropdownMenuLink"
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
-        >...</a>
+        >{{list.title}}</a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item" @click="taskForm = !taskForm" href="#">Add Task</a>

@@ -1,11 +1,25 @@
 <template>
   <div class="board container-fluid">
     <div class="row justify-content-center">
-      <div class="col-7">
-        <h1>{{board.title}}</h1>
+      <div class="col-7 text-light">
+        <h1 @click="boardForm = !boardForm" v-if="!boardForm">{{board.title}}</h1>
+        <form
+          v-if="boardForm"
+          class="form-inline justify-content-center col-12 my-2"
+          @submit.prevent="editBoard"
+        >
+          <input
+            class="form-control col-lg-3 mx-2"
+            type="text"
+            placeholder="title"
+            v-model="board.title"
+            required
+          />
+          <button class="btn btn-warning" type="submit">edit</button>
+        </form>
       </div>
       <div class="col-7">
-        <button @click="listForm= !listForm" class="btn btn-outline-success">Add list</button>
+        <button @click="listForm= !listForm" class="btn btn-success btn-outline-primary">Add list</button>
       </div>
       <div class="col-12">
         <form
@@ -43,7 +57,8 @@ export default {
       newList: {
         boardId: this.$route.params.id
       },
-      listForm: false
+      listForm: false,
+      boardForm: false
     };
   },
   methods: {
@@ -52,6 +67,10 @@ export default {
       this.newList = {
         boardId: this.$route.params.id
       };
+    },
+    editBoard() {
+      this.$store.dispatch("editBoard", this.board);
+      this.boardForm = false;
     }
   },
   computed: {
