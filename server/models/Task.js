@@ -9,7 +9,7 @@ const commentSchema = new Schema(
     taskId: { type: ObjId, ref: "Task", required: true },
     listId: { type: ObjId, ref: "List", required: true },
   },
-  { timestamps: true, toJSON: { virtuals: true } }
+  { toJSON: { virtuals: true } }
 );
 const Task = new Schema(
   {

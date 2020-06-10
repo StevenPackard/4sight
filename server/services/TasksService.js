@@ -51,8 +51,8 @@ class TasksService {
   }
   async editComment(comment) {
     await dbContext.Tasks.findOneAndUpdate(
-      { _id: comment.taskId },
-      { $update: { comments: { _id: comment.id } }, comment },
+      { _id: comment.taskId, "comments._id": comment.id },
+      { $set: { "comments.$": comment } },
       { new: true }
     );
   }
