@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-    <router-link class="navbar-brand text-light" :to="{ name: 'home' }"
+    <router-link class="navbar-brand text-light" :to="{ name: 'boards' }"
       >4sight</router-link
     >
     <button

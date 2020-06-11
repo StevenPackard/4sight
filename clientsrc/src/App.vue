@@ -35,7 +35,7 @@ export default {
 // @import "./assets/_overrides.scss";
 
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: "Old Standard TT", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -61,7 +61,7 @@ export default {
   flex-direction: column;
   min-height: 100vh;
   overflow-x: auto;
-  background-image: linear-gradient(315deg, #222 0%, #303030 74%);
+  background-image: linear-gradient(315deg, #222 0%, #313131 74%);
 }
 .grow {
   flex-grow: 1;
