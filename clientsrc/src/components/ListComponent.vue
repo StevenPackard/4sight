@@ -5,7 +5,7 @@
     <div class="row justify-content-between">
       <form v-if="listForm" class="form-inline col-12 my-2" @submit.prevent="editList">
         <input
-          class="form-control col-md-9 mx-2"
+          class="form-control col-md-8 mx-2"
           type="text"
           placeholder="title"
           v-model="list.title"
@@ -13,7 +13,7 @@
         />
         <button class="btn" type="submit">edit</button>
       </form>
-      <div v-if="!listForm" class="dropdown col-12 mr-2 mt-1">
+      <div v-if="!listForm" class="dropdown col-12 mr-2 mt-1 border-bottom">
         <a
           class="btn dropdown dropdown-toggle text-dark mb-1"
           href="#"

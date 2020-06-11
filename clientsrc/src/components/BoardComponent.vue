@@ -6,13 +6,31 @@
           <h4 class="card-title">{{board.title}}</h4>
           <p class="card-text">{{board.description}}</p>
           <p class="card-text">{{new Date(board.createdAt).toLocaleString("en-US")}}</p>
+          <p>{{board.creatorEmail}}</p>
         </div>
       </router-link>
       <div class="row justify-content-center mb-2">
-        <button class="btn btn-danger col-3" @click="deleteBoard">Delete Board</button>
+        <div class="dropdown mt-1 col-12">
+          <a
+            class="btn dropdown dropdown-toggle text-dark bg-white"
+            href="#"
+            role="button"
+            id="dropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >options</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" @click="deleteBoard" href="#">Delete</a>
+            <a class="dropdown-item" @click="editForm = !editForm" href="#">Edit</a>
+            <a class="dropdown-item" @click="collabForm = !collabForm" href="#">Add collaborator</a>
+            <a class="dropdown-item" @click="showCollab = !showCollab" href="#">Show collaborators</a>
+          </div>
+        </div>
+        <!-- <button class="btn btn-danger col-3" @click="deleteBoard">Delete Board</button>
         <button @click="editForm = !editForm" class="btn btn-warning col-3 ml-3 mr-3">edit</button>
         <button @click="collabForm = !collabForm" class="btn btn-info col-3">Add Collaborators</button>
-        <button @click="showCollab = !showCollab" class="btn btn-danger">show collab</button>
+        <button @click="showCollab = !showCollab" class="btn btn-danger">show collab</button>-->
       </div>
       <div class="row">
         <form
