@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app-grow">
     <navbar />
-    <router-view class="grow" />
+    <router-view class="grow " />
     <footer class="bg-primary p-2 text-light">
       Made with Love by Troy and Steven
     </footer>
@@ -61,6 +61,7 @@ export default {
   flex-direction: column;
   min-height: 100vh;
   overflow-x: auto;
+  background-image: linear-gradient(315deg, #222 0%, #303030 74%);
 }
 .grow {
   flex-grow: 1;

@@ -1,8 +1,10 @@
 <template>
-  <div class="comment-component bg-warning border my-1">
+  <div class="comment-component bg-warning rounded border my-1">
     <div class="row">
       <div v-if="!commentForm" class="dropdown mt-1 col-12">
         <a
+          @mouseover="commentDetails = true"
+          @mouseleave="commentDetails = false"
           class="btn dropdown dropdown-toggle text-dark"
           href="#"
           role="button"
@@ -20,12 +22,6 @@
           <a class="dropdown-item" @click="showDeleteCommentAlert" href="#"
             >Delete</a
           >
-          <a
-            class="dropdown-item"
-            @click="commentDetails = !commentDetails"
-            href="#"
-            >Show details</a
-          >
         </div>
       </div>
       <form
@@ -40,7 +36,12 @@
           v-model="comment.title"
           required
         />
-        <button class="btn btn-success" type="submit">+</button>
+        <button
+          class="btn btn-success btn-outline-light text-dark"
+          type="submit"
+        >
+          +
+        </button>
       </form>
       <div v-if="commentDetails" class="col">
         <p>{{ comment.creatorEmail }}</p>

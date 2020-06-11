@@ -6,6 +6,10 @@ import store from "./store";
 import { Auth0Plugin } from "@bcwdev/auth0-vue";
 import { domain, clientId, audience } from "./authConfig";
 import swal from "sweetalert";
+import VueTour from "vue-tour";
+
+// @ts-ignore
+Vue.use(VueTour);
 
 Vue.use(Auth0Plugin, {
   domain,

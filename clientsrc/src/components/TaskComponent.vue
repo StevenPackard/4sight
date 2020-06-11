@@ -1,5 +1,5 @@
 <template>
-  <div class="task-component col-12 border-top border-bottom bg-teal">
+  <div class="task-component col-12 border-top border-bottom shadow bg-teal">
     <div class="row">
       <div v-if="!taskForm" class="dropdown col-12 mt-1 px-0">
         <a
@@ -13,27 +13,18 @@
           >{{ task.title }}</a
         >
 
-        <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenuLink">
-          <a
-            class="dropdown-item text-dark"
-            @click="commentForm = !commentForm"
-            href="#"
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item " @click="commentForm = !commentForm" href="#"
             >Add Comment</a
           >
-          <a
-            class="dropdown-item text-dark"
-            @click="taskForm = !taskForm"
-            href="#"
+          <a class="dropdown-item" @click="taskForm = !taskForm" href="#"
             >Edit</a
           >
-          <a
-            class="dropdown-item text-dark"
-            @click="showDeleteTaskAlert"
-            href="#"
+          <a class="dropdown-item " @click="showDeleteTaskAlert" href="#"
             >Delete Task</a
           >
           <a
-            class="dropdown-item text-dark"
+            class="dropdown-item "
             @click="moveTaskForm = !moveTaskForm"
             href="#"
             >MoveTask</a
@@ -53,7 +44,9 @@
         v-model="task.title"
         required
       />
-      <button class="btn btn-success" type="submit">+</button>
+      <button class="btn btn-warning btn-outline-light text-dark" type="submit">
+        +
+      </button>
     </form>
     <form
       class="form-inline justify-content-center col-12 my-2"
@@ -67,11 +60,13 @@
         v-model="newComment.title"
         required
       />
-      <button class="btn btn-success" type="submit">+</button>
+      <button class="btn btn-warning btn-outline-light text-dark" type="submit">
+        +
+      </button>
     </form>
     <div class="row justify-content-center" v-if="moveTaskForm">
       <div
-        class="border col-8 bg-orange action my-1"
+        class="border col-8 bg-orange rounded shadow action my-1"
         v-for="list in lists"
         :key="list.id"
         @click="moveTask({ id: list.id })"

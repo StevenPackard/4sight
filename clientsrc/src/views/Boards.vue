@@ -18,11 +18,40 @@
           placeholder="description"
           v-model="newBoard.description"
         />
-        <button class="btn btn-success" type="submit">Create Board</button>
+        <button
+          class="btn btn-success btn-outline-light text-dark"
+          type="submit"
+        >
+          Create Board
+        </button>
       </form>
     </div>
     <div class="row">
-      <div class="col text-light">
+      <div v-if="profileEdit" class="col">
+        <form
+          class="form-inline justify-content-center col-12 my-2"
+          @submit.prevent="editProfile"
+        >
+          <input
+            class="form-control col-lg-3 mx-2"
+            type="text"
+            placeholder="title"
+            v-model="profile.name"
+            required
+          />
+          <button
+            type="submit"
+            class="btn btn-warning btn-outline light text-dark"
+          >
+            edit
+          </button>
+        </form>
+      </div>
+      <div
+        @click="profileEdit = !profileEdit"
+        v-if="!profileEdit"
+        class="col text-light"
+      >
         <h5>{{ profile.name }}'s Boards</h5>
       </div>
     </div>
@@ -45,6 +74,7 @@ export default {
         title: "",
         description: "",
       },
+      profileEdit: false,
     };
   },
   computed: {
@@ -59,6 +89,10 @@ export default {
     addBoard() {
       this.$store.dispatch("addBoard", this.newBoard);
       this.newBoard = { title: "", description: "" };
+    },
+    editProfile() {
+      this.$store.dispatch("editProfile", this.profile);
+      this.profileEdit = false;
     },
   },
   components: {

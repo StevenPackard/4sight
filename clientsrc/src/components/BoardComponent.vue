@@ -1,6 +1,6 @@
 <template>
   <div class="col-4 board my-2">
-    <div class="card bg-light">
+    <div class="card bg-success border">
       <router-link
         class="test"
         :to="{ name: 'ActiveBoard', params: { id: board.id } }"
@@ -11,13 +11,13 @@
           <p class="card-text">
             {{ new Date(board.createdAt).toLocaleString("en-US") }}
           </p>
-          <p>{{ board.creatorEmail }}</p>
+          <p>Created by: {{ board.creatorEmail }}</p>
         </div>
       </router-link>
       <div class="row justify-content-center mb-2">
         <div class="dropdown mt-1 col-12">
           <a
-            class="btn dropdown text-dark bg-white"
+            class="btn dropdown text-dark btn-outline-light btn-warning"
             href="#"
             role="button"
             id="dropdownMenuLink"
@@ -73,7 +73,12 @@
             placeholder="description"
             v-model="board.description"
           />
-          <button class="btn btn-success" type="submit">+</button>
+          <button
+            class="btn btn-success btn-outline-light text-dark"
+            type="submit"
+          >
+            +
+          </button>
         </form>
         <form
           v-if="collabForm"
@@ -87,7 +92,12 @@
             v-model="newCollab.email"
             required
           />
-          <button class="btn btn-success" type="submit">+</button>
+          <button
+            class="btn btn-success btn-outline-light text-dark"
+            type="submit"
+          >
+            +
+          </button>
         </form>
       </div>
       <div class="row">

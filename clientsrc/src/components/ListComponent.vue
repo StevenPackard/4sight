@@ -1,6 +1,6 @@
 <template>
   <div
-    class="list-component col-md-2 col-11 border list-tall bg-info my-2 mx-4 d-inline-block rounded shadow"
+    class="list-component col-md-2 col-11 border list-tall bg-info my-2 mx-4 d-inline-block rounded shadow "
   >
     <div class="row justify-content-between">
       <form
@@ -17,7 +17,10 @@
         />
         <button class="btn" type="submit">edit</button>
       </form>
-      <div v-if="!listForm" class="dropdown col-12 mr-2 mt-1 border-bottom">
+      <div
+        v-if="!listForm"
+        class="dropdown col-12 mr-2 mt-1 shadow border-bottom"
+      >
         <a
           class="btn dropdown dropdown-toggle text-dark mb-1"
           href="#"
@@ -55,7 +58,12 @@
           v-model="newTask.title"
           required
         />
-        <button class="btn btn-success" type="submit">+</button>
+        <button
+          class="btn btn-success btn-outline-light text-dark"
+          type="submit"
+        >
+          +
+        </button>
       </form>
     </div>
     <div class="row tall-row">

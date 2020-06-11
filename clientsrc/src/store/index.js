@@ -45,6 +45,9 @@ export default new Vuex.Store({
     setAllTasks(state, tasks) {
       state.allTasks = tasks;
     },
+    resetAll(state) {
+      state.activeBoard = {};
+    },
   },
   actions: {
     //#region -- AUTH STUFF --
@@ -60,6 +63,15 @@ export default new Vuex.Store({
         commit("setUser", res.data);
       } catch (err) {
         console.error(err);
+      }
+    },
+    async editProfile({ commit, dispatch }, profile) {
+      try {
+        let res = await api.put("profile/" + profile.id, profile);
+        console.log(res);
+        dispatch("getProfile");
+      } catch (error) {
+        console.error(error);
       }
     },
     //#endregion
