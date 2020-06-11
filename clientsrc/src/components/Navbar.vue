@@ -16,7 +16,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item" :class="{ active: $route.name == 'home' }">
+        <li
+          class="nav-item"
+          v-if="!$auth.isAuthenticated"
+          :class="{ active: $route.name == 'home' }"
+        >
           <router-link :to="{ name: 'home' }" class="nav-link text-light"
             >Home</router-link
           >
@@ -60,7 +64,8 @@ export default {
     async login() {
       await this.$auth.loginWithPopup();
       this.$store.dispatch("setBearer", this.$auth.bearer);
-      this.$store.dispatch("getProfile");
+      await this.$store.dispatch("getProfile");
+      this.$router.push({ name: "boards" });
       console.log("this.$auth.user: ");
       console.log(this.$auth.user);
     },

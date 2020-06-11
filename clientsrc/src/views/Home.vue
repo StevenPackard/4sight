@@ -329,6 +329,7 @@ export default {
       await this.$auth.loginWithPopup();
       this.$store.dispatch("setBearer", this.$auth.bearer);
       this.$store.dispatch("getProfile");
+      this.$router.push({ name: "boards" });
       console.log("this.$auth.user: ");
       console.log(this.$auth.user);
     },
