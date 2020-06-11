@@ -3,7 +3,11 @@
     class="list-component col-md-2 col-11 border list-tall bg-info my-2 mx-4 d-inline-block rounded shadow"
   >
     <div class="row justify-content-between">
-      <form v-if="listForm" class="form-inline col-12 my-2" @submit.prevent="editList">
+      <form
+        v-if="listForm"
+        class="form-inline col-12 my-2"
+        @submit.prevent="editList"
+      >
         <input
           class="form-control col-md-8 mx-2"
           type="text"
@@ -22,12 +26,19 @@
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
-        >{{list.title}}</a>
+          >{{ list.title }}</a
+        >
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" @click="taskForm = !taskForm" href="#">Add Task</a>
-          <a class="dropdown-item" @click="listForm = !listForm" href="#">Edit</a>
-          <a class="dropdown-item" @click="deleteList" href="#">Delete List</a>
+          <a class="dropdown-item" @click="taskForm = !taskForm" href="#"
+            >Add Task</a
+          >
+          <a class="dropdown-item" @click="listForm = !listForm" href="#"
+            >Edit</a
+          >
+          <a class="dropdown-item" @click="showDeleteListAlert" href="#"
+            >Delete List</a
+          >
         </div>
       </div>
     </div>
@@ -53,7 +64,6 @@
   </div>
 </template>
 
-
 <script>
 import Task from "@/components/TaskComponent";
 export default {
@@ -65,22 +75,22 @@ export default {
     return {
       taskForm: false,
       newTask: {
-        listId: this.list.id
+        listId: this.list.id,
       },
-      listForm: false
+      listForm: false,
     };
   },
   computed: {
     tasks() {
       // return this.$store.state.tasks.filter(t => t.listId == this.list.id);
       return this.$store.state.tasks[this.list.id];
-    }
+    },
   },
   methods: {
     addTask() {
       this.$store.dispatch("addTask", { ...this.newTask });
       this.newTask = {
-        listId: this.list.id
+        listId: this.list.id,
       };
       this.taskForm = false;
     },
@@ -90,15 +100,30 @@ export default {
     editList() {
       this.$store.dispatch("editList", this.list);
       this.listForm = false;
-    }
+    },
+    showDeleteListAlert() {
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this list!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          swal("List deleted!", {
+            icon: "success",
+          });
+          this.deleteList();
+        }
+      });
+    },
   },
   components: {
-    Task
+    Task,
   },
-  props: ["list"]
+  props: ["list"],
 };
 </script>
-
 
 <style scoped>
 .list-tall {

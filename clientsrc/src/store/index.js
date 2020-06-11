@@ -45,10 +45,6 @@ export default new Vuex.Store({
     setAllTasks(state, tasks) {
       state.allTasks = tasks;
     },
-    setCollabBoards(state, boards) {
-      let newBoards = [...state.boards, ...boards];
-      state.boards = newBoards;
-    },
   },
   actions: {
     //#region -- AUTH STUFF --
@@ -74,10 +70,7 @@ export default new Vuex.Store({
         commit("setBoards", res.data);
       });
     },
-    // async getCollabBoards({ commit, dispatch }) {
-    //   let res = await api.get("boards/collabs");
-    //   commit("setCollabBoards", res.data);
-    // },
+
     addBoard({ commit, dispatch }, boardData) {
       api.post("boards", boardData).then((serverBoard) => {
         dispatch("getBoards");
