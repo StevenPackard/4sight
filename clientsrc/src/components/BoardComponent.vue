@@ -24,7 +24,7 @@
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
-            >...</a
+            >options</a
           >
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a
