@@ -2,7 +2,9 @@
   <div id="app" class="app-grow">
     <navbar />
     <router-view class="grow" />
-    <footer class="bg-primary p-2 text-light">Made with Love by Troy and Steven</footer>
+    <footer class="bg-primary p-2 text-light">
+      Made with Love by Troy and Steven
+    </footer>
   </div>
 </template>
 
@@ -21,11 +23,10 @@ export default {
     }
   },
   components: {
-    Navbar
-  }
+    Navbar,
+  },
 };
 </script>
-
 
 <style lang="scss">
 // @import "./assets/_variables.scss";
@@ -59,7 +60,7 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 .grow {
   flex-grow: 1;
