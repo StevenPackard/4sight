@@ -15,7 +15,12 @@
           v-model="list.title"
           required
         />
-        <button class="btn" type="submit">edit</button>
+        <button
+          class="btn btn-success btn-outline-light text-dark"
+          type="submit"
+        >
+          edit
+        </button>
       </form>
       <div
         v-if="!listForm"

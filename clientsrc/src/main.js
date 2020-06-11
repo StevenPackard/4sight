@@ -8,6 +8,7 @@ import { domain, clientId, audience } from "./authConfig";
 import swal from "sweetalert";
 import VueTour from "vue-tour";
 
+require("vue-tour/dist/vue-tour.css");
 // @ts-ignore
 Vue.use(VueTour);
 

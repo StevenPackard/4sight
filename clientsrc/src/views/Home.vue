@@ -2,23 +2,16 @@
   <div class="home container-fluid">
     <div class="row">
       <div class="col-12">
-        <h1 class="text-teal">Welcome to 4Sight!</h1>
+        <h1 id="v-step-0" class="text-teal">Welcome to 4Sight!</h1>
         <p class="text-orange">
           Take any project and break it down to see the progress you make!
         </p>
         <p class="text-orange">
           Add Collaborators so that everyone can know how the project is going!
         </p>
-        <p class="text-orange">Try our Demo and then sign up to get started!</p>
       </div>
     </div>
     <div class="row justify-content-center mx-2">
-      <div v-if="taskDescript" class="col-1 text-light">
-        <p class="mt-5">
-          Finished with a task? move it to a List Titled: "Completed" to let
-          everyone know!
-        </p>
-      </div>
       <div
         class="list-component col-md-4 col-lg-2 col-sm-6 col-11 border list-tall bg-info my-2 mx-4 d-inline-block rounded shadow"
       >
@@ -31,13 +24,18 @@
               v-model="list.title"
               required
             />
-            <button class="btn" @click="listForm = !listForm" type="button">
+            <button
+              class="btn btn-success btn-outline-light text-dark"
+              @click="listForm = !listForm"
+              type="button"
+            >
               edit
             </button>
           </form>
           <div
             v-if="!listForm"
             @click="listDescript = !listDescript"
+            id="v-step-1"
             class="dropdown col-12 mr-2 mt-1 border-bottom shadow"
           >
             <a
@@ -75,7 +73,7 @@
               required
             />
             <button
-              class="btn btn-success"
+              class="btn btn-success btn-outline-light text-dark"
               @click="taskForm = !taskForm"
               type="button"
             >
@@ -89,7 +87,8 @@
               <div
                 @click="taskDescript = !taskDescript"
                 v-if="!taskForm1"
-                class="dropdown col-12 mt-1 px-0"
+                id="v-step-2"
+                class="dropdown col-12 mt-1 px-0 v-step-3"
               >
                 <a
                   class="btn dropdown dropdown-toggle text-dark"
@@ -99,28 +98,25 @@
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
-                  >demo Task</a
+                  >Demo Task</a
                 >
 
-                <div
-                  class="dropdown-menu bg-light"
-                  aria-labelledby="dropdownMenuLink"
-                >
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <a
-                    class="dropdown-item text-dark"
+                    class="dropdown-item"
                     @click="commentForm = !commentForm"
                     href="#"
                     >Add Comment</a
                   >
                   <a
-                    class="dropdown-item text-dark"
+                    class="dropdown-item "
                     @click="taskForm1 = !taskForm1"
                     href="#"
                     >Edit</a
                   >
-                  <a class="dropdown-item text-dark" href="#">Delete Task</a>
+                  <a class="dropdown-item " href="#">Delete Task</a>
                   <a
-                    class="dropdown-item text-dark"
+                    class="dropdown-item "
                     @click="moveTaskForm = !moveTaskForm"
                     href="#"
                     >MoveTask</a
@@ -140,7 +136,7 @@
                 required
               />
               <button
-                class="btn btn-success"
+                class="btn btn-warning btn-outline-light text-dark"
                 @click="taskForm1 = !taskForm1"
                 type="submit"
               >
@@ -159,7 +155,7 @@
                 required
               />
               <button
-                class="btn btn-success"
+                class="btn btn-warning btn-outline text-dark"
                 @click="commentForm = !commentForm"
                 type="button"
               >
@@ -172,11 +168,16 @@
             <div class="row">
               <div class="col-12">
                 <div class="bg-warning border shadow rounded my-1">
-                  <div class="row">
+                  <div
+                    @mouseover="commentCreator = true"
+                    @mouseleave="commentCreator = false"
+                    class="row"
+                  >
                     <div
                       v-if="!commentForm1"
                       @click="commentDescript = !commentDescript"
                       class="dropdown mt-1 col-12"
+                      id="v-step-3"
                     >
                       <a
                         class="btn dropdown dropdown-toggle text-dark"
@@ -201,6 +202,9 @@
                         >
                         <a class="dropdown-item" href="#">Delete</a>
                       </div>
+                      <div v-if="commentCreator">
+                        <p>demo@demo.com</p>
+                      </div>
                     </div>
                     <form
                       class="form-inline justify-content-center col-12 my-2"
@@ -214,7 +218,7 @@
                         required
                       />
                       <button
-                        class="btn btn-success"
+                        class="btn btn-success btn-outline-light text-dark "
                         @click="commentForm1 = !commentForm1"
                         type="button"
                       >
@@ -228,16 +232,10 @@
           </div>
         </div>
       </div>
-      <div v-if="listDescript" class="col-1 text-light">
-        <p>You can add new Tasks here! you can also edit and delete them.</p>
-      </div>
-      <div v-if="commentDescript" class="col-1 text-light mt-8">
-        <p>Add comments to flush out what really needs done in that task!</p>
-      </div>
     </div>
     <div class="row">
       <div class="col-12">
-        <span class="navbar-text">
+        <span id="v-step-4" class="navbar-text">
           <button
             class="btn btn-success"
             @click="login"
@@ -248,6 +246,7 @@
         </span>
       </div>
     </div>
+    <v-tour v-if="!$auth.isAuthenticated" name="myTour" :steps="steps"></v-tour>
   </div>
 </template>
 
@@ -261,6 +260,7 @@ export default {
       task: {},
       newComment: {},
       comment: {},
+      commentCreator: false,
       listForm: false,
       taskForm: false,
       moveTaskForm: false,
@@ -270,9 +270,57 @@ export default {
       listDescript: false,
       commentDescript: false,
       taskDescript: false,
+      steps: [
+        {
+          target: "#v-step-0", // We're using document.querySelector() under the hood
+          header: {
+            title: "Welcome to 4Sight!",
+          },
+          content: `Take the tour to see what you can do! `,
+          params: {},
+        },
+        {
+          target: "#v-step-1",
+          content:
+            "Add lists for each step of your project.  ex. 'In Progress' ",
+          params: {
+            placement: "left",
+          },
+        },
+        {
+          target: "#v-step-2",
+          content: "Add tasks to break down what needs to happen at each step",
+          params: {
+            placement: "right", // Any valid Popper.js placement. See https://popper.js.org/popper-documentation.html#Popper.placements
+          },
+        },
+        {
+          target: ".v-step-3",
+          content:
+            "Click on the task to see options, like moving to a new list",
+          params: {
+            placement: "right", // Any valid Popper.js placement. See https://popper.js.org/popper-documentation.html#Popper.placements
+          },
+        },
+        {
+          target: "#v-step-3",
+          content:
+            "Add comments to flesh out what really needs done in that task!",
+          params: {
+            placement: "left", // Any valid Popper.js placement. See https://popper.js.org/popper-documentation.html#Popper.placements
+          },
+        },
+        {
+          target: "#v-step-4",
+          content: "Sign up to get started today!",
+          params: {
+            placement: "right", // Any valid Popper.js placement. See https://popper.js.org/popper-documentation.html#Popper.placements
+          },
+        },
+      ],
     };
   },
-  mounted: function() {
+  mounted() {
     this.$tours["myTour"].start();
   },
   computed: {},
