@@ -10,17 +10,34 @@
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
-        >{{task.title}}</a>
+          >{{ task.title }}</a
+        >
 
         <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenuLink">
           <a
             class="dropdown-item text-dark"
             @click="commentForm = !commentForm"
             href="#"
-          >Add Comment</a>
-          <a class="dropdown-item text-dark" @click="taskForm = !taskForm" href="#">Edit</a>
-          <a class="dropdown-item text-dark" @click="deleteTask" href="#">Delete Task</a>
-          <a class="dropdown-item text-dark" @click="moveTaskForm = !moveTaskForm" href="#">MoveTask</a>
+            >Add Comment</a
+          >
+          <a
+            class="dropdown-item text-dark"
+            @click="taskForm = !taskForm"
+            href="#"
+            >Edit</a
+          >
+          <a
+            class="dropdown-item text-dark"
+            @click="showDeleteTaskAlert"
+            href="#"
+            >Delete Task</a
+          >
+          <a
+            class="dropdown-item text-dark"
+            @click="moveTaskForm = !moveTaskForm"
+            href="#"
+            >MoveTask</a
+          >
         </div>
       </div>
     </div>
@@ -57,17 +74,22 @@
         class="border col-8 bg-orange action my-1"
         v-for="list in lists"
         :key="list.id"
-        @click="moveTask({id: list.id})"
-      >{{list.title}}</div>
+        @click="moveTask({ id: list.id })"
+      >
+        {{ list.title }}
+      </div>
     </div>
     <div class="row">
       <div class="col-12">
-        <comment v-for="comment in comments" :key="comment.id" :comment="comment" />
+        <comment
+          v-for="comment in comments"
+          :key="comment.id"
+          :comment="comment"
+        />
       </div>
     </div>
   </div>
 </template>
-
 
 <script>
 import Comment from "@/components/CommentComponent";
@@ -78,10 +100,10 @@ export default {
       commentForm: false,
       newComment: {
         taskId: this.task.id,
-        listId: this.task.listId
+        listId: this.task.listId,
       },
       taskForm: false,
-      moveTaskForm: false
+      moveTaskForm: false,
     };
   },
   computed: {
@@ -90,14 +112,14 @@ export default {
     },
     lists() {
       return this.$store.state.lists;
-    }
+    },
   },
   methods: {
     addComment() {
       this.$store.dispatch("addComment", { ...this.newComment });
       this.newComment = {
         taskId: this.task.id,
-        listId: this.task.listId
+        listId: this.task.listId,
       };
       this.commentForm = false;
     },
@@ -112,17 +134,32 @@ export default {
       this.$store.dispatch("moveTask", {
         listId: data.id,
         id: this.task.id,
-        oldListId: this.task.listId
+        oldListId: this.task.listId,
       });
-    }
+    },
+    showDeleteTaskAlert() {
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this task!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          swal("Task deleted!", {
+            icon: "success",
+          });
+          this.deleteTask();
+        }
+      });
+    },
   },
   components: {
-    Comment
+    Comment,
   },
-  props: ["task"]
+  props: ["task"],
 };
 </script>
-
 
 <style scoped>
 .action {

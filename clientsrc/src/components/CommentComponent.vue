@@ -10,11 +10,22 @@
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
-        >{{comment.title}}</a>
+          >"{{ comment.title }}"</a
+        >
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" @click="commentForm = !commentForm" href="#">Edit</a>
-          <a class="dropdown-item" @click="deleteComment" href="#">Delete</a>
+          <a class="dropdown-item" @click="commentForm = !commentForm" href="#"
+            >Edit</a
+          >
+          <a class="dropdown-item" @click="showDeleteCommentAlert" href="#"
+            >Delete</a
+          >
+          <a
+            class="dropdown-item"
+            @click="commentDetails = !commentDetails"
+            href="#"
+            >Show details</a
+          >
         </div>
       </div>
       <form
@@ -31,20 +42,27 @@
         />
         <button class="btn btn-success" type="submit">+</button>
       </form>
+      <div v-if="commentDetails" class="col">
+        <p>{{ comment.creatorEmail }}</p>
+      </div>
     </div>
   </div>
 </template>
-
 
 <script>
 export default {
   name: "comment-component",
   data() {
     return {
-      commentForm: false
+      commentForm: false,
+      commentDetails: false,
     };
   },
-  computed: {},
+  computed: {
+    isCreator() {
+      return this.$store.state.user.email == this.comment.creatorEmail;
+    },
+  },
   methods: {
     deleteComment() {
       this.$store.dispatch("deleteComment", this.comment);
@@ -52,13 +70,27 @@ export default {
     editComment() {
       this.$store.dispatch("editComment", this.comment);
       this.commentForm = false;
-    }
+    },
+    showDeleteCommentAlert() {
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this comment!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          swal("Comment deleted!", {
+            icon: "success",
+          });
+          this.deleteComment();
+        }
+      });
+    },
   },
   components: {},
-  props: ["comment"]
+  props: ["comment"],
 };
 </script>
 
-
-<style scoped>
-</style>
+<style scoped></style>

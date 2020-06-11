@@ -1,7 +1,10 @@
 <template>
   <div class="boards container-fluid">
     <div class="row justify-content-center">
-      <form class="form-inline justify-content-center col-12 my-2" @submit.prevent="addBoard">
+      <form
+        class="form-inline justify-content-center col-12 my-2"
+        @submit.prevent="addBoard"
+      >
         <input
           class="form-control col-lg-3 mx-2"
           type="text"
@@ -20,7 +23,7 @@
     </div>
     <div class="row">
       <div class="col text-light">
-        <h5>{{profile.name}}'s Boards</h5>
+        <h5>{{ profile.name }}'s Boards</h5>
       </div>
     </div>
     <div class="row">
@@ -35,14 +38,13 @@ export default {
   name: "boards",
   mounted() {
     this.$store.dispatch("getBoards");
-    // this.$store.dispatch("getCollabBoards");
   },
   data() {
     return {
       newBoard: {
         title: "",
-        description: ""
-      }
+        description: "",
+      },
     };
   },
   computed: {
@@ -51,17 +53,17 @@ export default {
     },
     profile() {
       return this.$store.state.user;
-    }
+    },
   },
   methods: {
     addBoard() {
       this.$store.dispatch("addBoard", this.newBoard);
       this.newBoard = { title: "", description: "" };
-    }
+    },
   },
   components: {
-    Board
-  }
+    Board,
+  },
 };
 </script>
 <style>

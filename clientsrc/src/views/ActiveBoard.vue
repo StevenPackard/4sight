@@ -49,7 +49,7 @@ import List from "@/components/ListComponent";
 export default {
   name: "Activeboard",
   mounted() {
-    this.$store.dispatch("getActiveBoard", this.$route.params.id);
+    // this.$store.dispatch("getActiveBoard", this.$route.params.id);
     this.$store.dispatch("getAllLists", this.$route.params.id);
   },
   data() {
@@ -83,8 +83,7 @@ export default {
   },
   components: {
     List
-  },
-  props: ["boardId"]
+  }
 };
 </script>
 <style>
