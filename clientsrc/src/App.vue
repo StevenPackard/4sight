@@ -2,6 +2,7 @@
   <div id="app" class="app-grow">
     <navbar />
     <router-view class="grow" />
+    <footer class="bg-primary p-2 text-light">Made with Love by Troy and Steven</footer>
   </div>
 </template>
 
