@@ -24,6 +24,7 @@ export default new Vuex.Store({
     activeBoard: {},
     tasks: {},
     allTasks: [],
+    tempTask: {},
   },
   mutations: {
     setUser(state, user) {
@@ -217,6 +218,15 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error);
       }
+    },
+    setTaskToMove({ commit, dispatch }, task) {
+      commit("setTaskToMove", task);
+    },
+    async moveTaskDrag({ commit, dispatch }, task) {
+      task.taskToMove.listId = task.newListId;
+      await api.put("tasks/" + task.taskToMove.id, task.taskToMove);
+      dispatch("getTasksByListId", task.newListId);
+      await dispatch("getTasksByListId", task.oldListId);
     },
     async addComment({ commit, dispatch }, commentDeetz) {
       try {

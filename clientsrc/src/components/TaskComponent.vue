@@ -1,5 +1,8 @@
 <template>
-  <div class="task-component col-12 border-top border-bottom shadow bg-teal">
+  <div
+    @dragstart="moveTaskDrag()"
+    class="task-component col-12 border-top border-bottom shadow bg-teal"
+  >
     <div class="row">
       <div v-if="!taskForm" class="dropdown col-12 mt-1 px-0">
         <a
@@ -148,11 +151,17 @@ export default {
         }
       });
     },
+    moveTaskDrag() {
+      console.log("drag starting");
+
+      event.dataTransfer.setData("data", JSON.stringify(this.task));
+      event.dataTransfer.setData("list", this.listId);
+    },
   },
   components: {
     Comment,
   },
-  props: ["task"],
+  props: ["task", "listId"],
 };
 </script>
 
