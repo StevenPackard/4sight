@@ -4,7 +4,7 @@
   </div>
   <div v-else class="board container-fluid">
     <div class="row justify-content-center">
-      <div class="col-7 text-light">
+      <div class="col-7 text-dark mt-3 mb-2">
         <h1 @click="boardForm = !boardForm" v-if="!boardForm">
           {{ board.title }}
         </h1>
@@ -20,10 +20,7 @@
             v-model="board.title"
             required
           />
-          <button
-            class="btn btn-warning btn-outline-light text-dark"
-            type="submit"
-          >
+          <button class="btn btn-warning btn-outline-dark" type="submit">
             edit
           </button>
         </form>
@@ -31,9 +28,9 @@
       <div class="col-7">
         <button
           @click="listForm = !listForm"
-          class="btn btn-success btn-outline-light text-dark"
+          class="btn btn-success btn-outline-dark  mb-4"
         >
-          Add list
+          Add list Item
         </button>
       </div>
       <div class="col-12">
@@ -49,10 +46,7 @@
             v-model="newList.title"
             required
           />
-          <button
-            class="btn btn-success btn-outline-light text-dark"
-            type="submit"
-          >
+          <button class="btn btn-success btn-outline-dark" type="submit">
             Create List
           </button>
         </form>

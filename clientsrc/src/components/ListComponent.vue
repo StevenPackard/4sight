@@ -3,7 +3,7 @@
     dropzone="zone"
     @drop.prevent="moveTaskDrag(list)"
     @dragover.prevent
-    class="list-component col-md-2 col-11 border list-tall bg-info my-2 mx-4 d-inline-block rounded shadow"
+    class="list-component col-md-2 col-11 border list-tall bg-light opacity my-2 mx-4 d-inline-block rounded shadow"
   >
     <div class="row justify-content-between">
       <form
@@ -115,7 +115,6 @@ export default {
       this.newTask = {
         listId: this.list.id,
       };
-      this.taskForm = false;
     },
     deleteList() {
       this.$store.dispatch("deleteList", this.list);
@@ -133,9 +132,9 @@ export default {
         dangerMode: true,
       }).then((willDelete) => {
         if (willDelete) {
-          swal("List deleted!", {
-            icon: "success",
-          });
+          // swal("List deleted!", {
+          //   icon: "success",
+          // });
           this.deleteList();
         }
       });

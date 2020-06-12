@@ -1,6 +1,6 @@
 <template>
   <div class="col-4 board my-2">
-    <div class="card bg-success border-dark shadow">
+    <div class="card border-dark shadow">
       <router-link
         class="test"
         :to="{ name: 'ActiveBoard', params: { id: board.id } }"
@@ -17,7 +17,7 @@
       <div class="row justify-content-center mb-2">
         <div class="dropdown mt-1 col-12">
           <a
-            class="btn dropdown text-dark btn-outline-light btn-info"
+            class="btn dropdown text-dark btn-outline-light btn-warning"
             href="#"
             role="button"
             id="dropdownMenuLink"

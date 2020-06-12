@@ -144,9 +144,9 @@ export default {
         dangerMode: true,
       }).then((willDelete) => {
         if (willDelete) {
-          swal("Task deleted!", {
-            icon: "success",
-          });
+          // swal("Task deleted!", {
+          //   icon: "success",
+          // });
           this.deleteTask();
         }
       });
