@@ -1,8 +1,8 @@
 <template>
-  <div id="app" class="app-grow">
+  <div id="app" class="app-grow bg-image">
     <navbar />
     <router-view class="grow " />
-    <footer class="bg-primary p-2 text-light">
+    <footer class="bg-dark p-2 text-light">
       Made with Love by Troy and Steven
     </footer>
   </div>
@@ -30,7 +30,7 @@ export default {
 
 <style lang="scss">
 // @import "./assets/_variables.scss";
-@import "./assets/darkly.scss";
+@import "./assets/yeti.scss";
 @import "bootstrap";
 // @import "./assets/_overrides.scss";
 
@@ -40,6 +40,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.bg-image {
+  background-image: url(./assets/sky.jpg);
+  height: fit-content;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #nav {
@@ -61,9 +68,15 @@ export default {
   flex-direction: column;
   min-height: 100vh;
   overflow-x: auto;
-  background-image: linear-gradient(315deg, #222 0%, #313131 74%);
+  /* background-image: linear-gradient(315deg, #222 0%, #313131 74%); */
 }
 .grow {
   flex-grow: 1;
+}
+.card {
+  opacity: 80%;
+}
+.opacity {
+  opacity: 80%;
 }
 </style>

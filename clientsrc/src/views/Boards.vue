@@ -50,7 +50,7 @@
       <div
         @click="profileEdit = !profileEdit"
         v-if="!profileEdit"
-        class="col text-light"
+        class="col text-dark "
       >
         <h5>{{ profile.name }}'s Boards</h5>
       </div>

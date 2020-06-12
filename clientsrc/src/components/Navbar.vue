@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark">
     <router-link class="navbar-brand text-light" :to="{ name: 'boards' }"
       >4sight</router-link
     >
