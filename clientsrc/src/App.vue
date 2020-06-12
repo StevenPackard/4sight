@@ -78,7 +78,7 @@ export default {
   opacity: 80%;
 }
 .opacity {
-  opacity: 80%;
+  opacity: 20%;
 }
 .action {
   cursor: pointer;
