@@ -1,6 +1,9 @@
 <template>
   <div
-    class="list-component col-md-2 col-11 border list-tall bg-light opacity my-2 mx-4 d-inline-block rounded shadow "
+    dropzone="zone"
+    @drop.prevent="moveTaskDrag(list)"
+    @dragover.prevent
+    class="list-component col-md-2 col-11 border list-tall bg-light opacity my-2 mx-4 d-inline-block rounded shadow"
   >
     <div class="row justify-content-between">
       <form
@@ -72,7 +75,14 @@
       </form>
     </div>
     <div class="row tall-row">
-      <task v-for="task in tasks" :key="task.id" :task="task" />
+      <task
+        draggable="true"
+        v-for="(task, index) in tasks"
+        :key="task.id"
+        :task="task"
+        :listId="list.id"
+        @dragstart="reorderTask(task, index)"
+      />
     </div>
   </div>
 </template>
@@ -128,6 +138,25 @@ export default {
           this.deleteList();
         }
       });
+    },
+    reorderTask(task, index) {
+      console.log(task, index);
+
+      this.$store.dispatch("setItemToMove", {
+        task: task,
+        oldList: this.list,
+      });
+    },
+    moveTaskDrag(list) {
+      console.log(list);
+      console.log("dropping Task");
+      let task = JSON.parse(event.dataTransfer.getData("data"));
+      let moveData = {
+        newListId: list.id,
+        oldListId: event.dataTransfer.getData("list"),
+        taskToMove: task,
+      };
+      this.$store.dispatch("moveTaskDrag", moveData);
     },
   },
   components: {
