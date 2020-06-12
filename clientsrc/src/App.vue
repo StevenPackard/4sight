@@ -74,12 +74,6 @@ export default {
 .grow {
   flex-grow: 1;
 }
-.card {
-  opacity: 80%;
-}
-.opacity {
-  opacity: 20%;
-}
 .action {
   cursor: pointer;
 }
