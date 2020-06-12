@@ -19,7 +19,7 @@
           v-model="newBoard.description"
         />
         <button
-          class="btn btn-success btn-outline-light text-dark"
+          class="btn btn-success btn-outline-dark mt-md-0 mt-3"
           type="submit"
         >
           Create Board
@@ -50,9 +50,9 @@
       <div
         @click="profileEdit = !profileEdit"
         v-if="!profileEdit"
-        class="col text-dark "
+        class="col text-dark action my-4"
       >
-        <h5>{{ profile.name }}'s Boards</h5>
+        <h3>{{ profile.name }}'s Boards</h3>
       </div>
     </div>
     <div class="row">

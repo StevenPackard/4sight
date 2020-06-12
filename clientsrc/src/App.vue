@@ -3,7 +3,8 @@
     <navbar />
     <router-view class="grow " />
     <footer class="bg-dark p-2 text-light">
-      Made with Love by Troy and Steven
+      Made with Love by <a href="https://github.com/TroyFuhriman">Troy</a> and
+      <a href="https://github.com/StevenPackard">Steven</a>
     </footer>
   </div>
 </template>
@@ -78,5 +79,11 @@ export default {
 }
 .opacity {
   opacity: 80%;
+}
+.action {
+  cursor: pointer;
+}
+.action:hover {
+  text-shadow: 0.5px 0.5px white;
 }
 </style>

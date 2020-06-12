@@ -1,11 +1,11 @@
 <template>
   <div v-if="!board.id">
-    ...loading
+    <h1 class="text-center mt-4">Loading...</h1>
   </div>
   <div v-else class="board container-fluid">
     <div class="row justify-content-center">
       <div class="col-7 text-dark mt-3 mb-2">
-        <h1 @click="boardForm = !boardForm" v-if="!boardForm">
+        <h1 class="action" @click="boardForm = !boardForm" v-if="!boardForm">
           {{ board.title }}
         </h1>
         <form

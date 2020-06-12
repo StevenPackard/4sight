@@ -1,19 +1,19 @@
 <template>
   <div class="home container-fluid">
     <div class="row">
-      <div class="col-12">
-        <h1 id="v-step-0" class="text-teal">Welcome to 4Sight!</h1>
-        <p class="text-orange">
+      <div class="col-12 text-dark mt-4">
+        <h1 id="v-step-0">Welcome to 4Sight!</h1>
+        <p class="mt-3">
           Take any project and break it down to see the progress you make!
         </p>
-        <p class="text-orange">
+        <p class="">
           Add Collaborators so that everyone can know how the project is going!
         </p>
       </div>
     </div>
-    <div class="row justify-content-center mx-2">
+    <div class="row justify-content-center mt-2 mx-2">
       <div
-        class="list-component col-md-4 col-lg-2 col-sm-6 col-11 border list-tall bg-info my-2 mx-4 d-inline-block rounded shadow"
+        class="list-component col-md-4 col-lg-2 col-sm-6 col-11 border opacity list-tall bg-light my-2 mx-4 d-inline-block rounded shadow"
       >
         <div class="row justify-content-between">
           <form v-if="listForm" class="form-inline col-12 my-2">
@@ -25,7 +25,7 @@
               required
             />
             <button
-              class="btn btn-success btn-outline-light text-dark"
+              class="btn btn-success btn-outline-dark"
               @click="listForm = !listForm"
               type="button"
             >
@@ -73,7 +73,7 @@
               required
             />
             <button
-              class="btn btn-success btn-outline-light text-dark"
+              class="btn btn-success btn-outline-dark "
               @click="taskForm = !taskForm"
               type="button"
             >
@@ -81,8 +81,8 @@
             </button>
           </form>
         </div>
-        <div class="row tall-row">
-          <div class="col-12 border-top border-bottom rounded shadow bg-teal">
+        <div class="row tall-row justify-content-center">
+          <div class="col-11 border-top border-bottom rounded shadow bg-info">
             <div class="row">
               <div
                 @click="taskDescript = !taskDescript"
@@ -136,7 +136,7 @@
                 required
               />
               <button
-                class="btn btn-warning btn-outline-light text-dark"
+                class="btn btn-warning btn-outline-dark"
                 @click="taskForm1 = !taskForm1"
                 type="submit"
               >
@@ -155,7 +155,7 @@
                 required
               />
               <button
-                class="btn btn-warning btn-outline text-dark"
+                class="btn btn-warning btn-outline-dark"
                 @click="commentForm = !commentForm"
                 type="button"
               >
@@ -163,7 +163,7 @@
               </button>
             </form>
             <div class="row justify-content-center" v-if="moveTaskForm">
-              <div class="border col-8 bg-orange action my-1">demo list 2</div>
+              <div class="border col-8 bg-secondary my-1">demo list 2</div>
             </div>
             <div class="row">
               <div class="col-12">
@@ -218,7 +218,7 @@
                         required
                       />
                       <button
-                        class="btn btn-success btn-outline-light text-dark "
+                        class="btn btn-success btn-outline-dark "
                         @click="commentForm1 = !commentForm1"
                         type="button"
                       >
@@ -237,7 +237,7 @@
       <div class="col-12">
         <span id="v-step-4" class="navbar-text">
           <button
-            class="btn btn-success"
+            class="btn btn-success btn-outline-dark"
             @click="login"
             v-if="!$auth.isAuthenticated"
           >
@@ -355,12 +355,9 @@ export default {
   background-color: #00bc8c;
 }
 .bg-orange {
-  background-color: #fd7e14;
+  background-color: #b8c0a5;
 }
 .text-teal {
   color: #00bc8c;
-}
-.text-orange {
-  color: #fd7e14;
 }
 </style>

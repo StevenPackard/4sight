@@ -3,7 +3,7 @@
     dropzone="zone"
     @drop.prevent="moveTaskDrag(list)"
     @dragover.prevent
-    class="list-component col-md-2 col-11 border list-tall bg-light opacity my-2 mx-4 d-inline-block rounded shadow"
+    class="list-component col-md-3 col-sm-6 col-12 col-lg-2 border-dark border list-tall bg-light opacity my-2 mx-4 d-inline-block rounded shadow"
   >
     <div class="row justify-content-between">
       <form
@@ -18,10 +18,7 @@
           v-model="list.title"
           required
         />
-        <button
-          class="btn btn-success btn-outline-light text-dark"
-          type="submit"
-        >
+        <button class="btn btn-success btn-outline-dark" type="submit">
           edit
         </button>
       </form>
@@ -30,7 +27,7 @@
         class="dropdown col-12 mr-2 mt-1 shadow border-bottom"
       >
         <a
-          class="btn dropdown dropdown-toggle text-dark mb-1"
+          class="btn dropdown dropdown-toggle text-dark text-wrap mb-1"
           href="#"
           role="button"
           id="dropdownMenuLink"
@@ -66,15 +63,12 @@
           v-model="newTask.title"
           required
         />
-        <button
-          class="btn btn-success btn-outline-light text-dark"
-          type="submit"
-        >
+        <button class="btn btn-success btn-outline-dark" type="submit">
           +
         </button>
       </form>
     </div>
-    <div class="row tall-row">
+    <div class="row justify-content-center tall-row">
       <task
         draggable="true"
         v-for="(task, index) in tasks"

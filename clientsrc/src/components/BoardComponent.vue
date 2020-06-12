@@ -1,5 +1,5 @@
 <template>
-  <div class="col-4 board my-2">
+  <div class="col-md-4 col-12 board my-2">
     <div class="card border-dark shadow">
       <router-link
         class="test"
@@ -9,109 +9,119 @@
           <h4 class="card-title">{{ board.title }}</h4>
           <p class="card-text">{{ board.description }}</p>
           <p class="card-text">
-            {{ new Date(board.createdAt).toLocaleString("en-US") }}
+            Created: {{ new Date(board.createdAt).toLocaleString("en-US") }}
           </p>
-          <p>Created by: {{ board.creatorEmail }}</p>
+          <p>By: {{ board.creator.name }}</p>
+          <p v-if="board.creator.name != board.creatorEmail">
+            {{ board.creatorEmail }}
+          </p>
         </div>
       </router-link>
-      <div class="row justify-content-center mb-2">
-        <div class="dropdown mt-1 col-12">
-          <a
-            class="btn dropdown text-dark btn-outline-light btn-warning"
-            href="#"
-            role="button"
-            id="dropdownMenuLink"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            >options</a
+      <div class="card-body">
+        <div class="row justify-content-center mt--2 mb-2">
+          <div class="dropdown col">
+            <a
+              @click="space = !space"
+              class="btn dropdown btn-outline-dark btn-warning"
+              href="#"
+              role="button"
+              id="dropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              >options</a
+            >
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a
+                v-if="isCreator"
+                class="dropdown-item"
+                @click="showDeletBoardAlert"
+                href="#"
+                >Delete</a
+              >
+              <a
+                v-if="isCreator"
+                class="dropdown-item"
+                @click="editForm = !editForm"
+                href="#"
+                >Edit</a
+              >
+              <a
+                v-if="isCreator"
+                class="dropdown-item"
+                @click="collabForm = !collabForm"
+                href="#"
+                >Add collaborator</a
+              >
+              <a
+                class="dropdown-item"
+                @click="showCollab = !showCollab"
+                href="#"
+                >Show collaborators</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <form
+            v-if="editForm"
+            class="form-inline justify-content-center col-12 my-2"
+            @submit.prevent="editBoard"
           >
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a
-              v-if="isCreator"
-              class="dropdown-item"
-              @click="showDeletBoardAlert"
-              href="#"
-              >Delete</a
+            <input
+              class="form-control col-lg-3 mx-2"
+              type="text"
+              placeholder="title"
+              v-model="board.title"
+              required
+            />
+            <input
+              class="form-control col-lg-3 mx-2"
+              type="text"
+              placeholder="description"
+              v-model="board.description"
+            />
+            <button
+              class="btn btn-success btn-outline-light text-dark"
+              type="submit"
             >
-            <a
-              v-if="isCreator"
-              class="dropdown-item"
-              @click="editForm = !editForm"
-              href="#"
-              >Edit</a
+              +
+            </button>
+          </form>
+          <form
+            v-if="collabForm"
+            class="form-inline justify-content-center col-12 my-2"
+            @submit.prevent="showAddCollabAlert"
+          >
+            <input
+              class="form-control col-lg-9 mx-2"
+              type="email"
+              placeholder="Collaborator email..."
+              v-model="newCollab.email"
+              required
+            />
+            <button
+              class="btn btn-success btn-outline-light text-dark"
+              type="submit"
             >
-            <a
-              v-if="isCreator"
-              class="dropdown-item"
-              @click="collabForm = !collabForm"
-              href="#"
-              >Add collaborator</a
-            >
-            <a class="dropdown-item" @click="showCollab = !showCollab" href="#"
-              >Show collaborators</a
-            >
+              +
+            </button>
+          </form>
+        </div>
+        <div class="row">
+          <div v-if="showCollab" class="col">
+            <collab
+              v-for="collab in collabs"
+              :key="collab.email"
+              :collab="collab"
+              :boardId="board.id"
+              :board="board"
+            />
           </div>
         </div>
       </div>
-      <div class="row">
-        <form
-          v-if="editForm"
-          class="form-inline justify-content-center col-12 my-2"
-          @submit.prevent="editBoard"
-        >
-          <input
-            class="form-control col-lg-3 mx-2"
-            type="text"
-            placeholder="title"
-            v-model="board.title"
-            required
-          />
-          <input
-            class="form-control col-lg-3 mx-2"
-            type="text"
-            placeholder="description"
-            v-model="board.description"
-          />
-          <button
-            class="btn btn-success btn-outline-light text-dark"
-            type="submit"
-          >
-            +
-          </button>
-        </form>
-        <form
-          v-if="collabForm"
-          class="form-inline justify-content-center col-12 my-2"
-          @submit.prevent="showAddCollabAlert"
-        >
-          <input
-            class="form-control col-lg-9 mx-2"
-            type="email"
-            placeholder="Collaborator email..."
-            v-model="newCollab.email"
-            required
-          />
-          <button
-            class="btn btn-success btn-outline-light text-dark"
-            type="submit"
-          >
-            +
-          </button>
-        </form>
-      </div>
-      <div class="row">
-        <div v-if="showCollab" class="col">
-          <collab
-            v-for="collab in collabs"
-            :key="collab.email"
-            :collab="collab"
-            :boardId="board.id"
-            :board="board"
-          />
-        </div>
-      </div>
     </div>
+    <div v-if="(space = true)" class="space1"></div>
   </div>
 </template>
 
@@ -128,6 +138,7 @@ export default {
         id: this.board.id,
       },
       showCollab: false,
+      space: false,
     };
   },
   methods: {
@@ -218,5 +229,11 @@ export default {
 }
 .test:hover {
   text-decoration: none;
+}
+.mt--2 {
+  margin-top: -3em;
+}
+.space1 {
+  height: 100px;
 }
 </style>

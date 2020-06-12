@@ -1,5 +1,5 @@
 <template>
-  <div class="collab-component bg-warning border my-1">
+  <div class="collab-component bg-warning border border-dark my-1">
     <div class="row">
       <div class="dropdown mt-1 col-12">
         <a

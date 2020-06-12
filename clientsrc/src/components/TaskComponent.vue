@@ -1,12 +1,12 @@
 <template>
   <div
     @dragstart="moveTaskDrag()"
-    class="task-component col-12 border-top border-bottom shadow bg-teal"
+    class="task-component col-11 border-top border-bottom shadow bg-info"
   >
     <div class="row">
       <div v-if="!taskForm" class="dropdown col-12 mt-1 px-0">
         <a
-          class="btn dropdown dropdown-toggle text-dark"
+          class="btn dropdown dropdown-toggle text-wrap text-dark"
           href="#"
           role="button"
           id="dropdownMenuLink"
@@ -47,7 +47,7 @@
         v-model="task.title"
         required
       />
-      <button class="btn btn-warning btn-outline-light text-dark" type="submit">
+      <button class="btn btn-warning btn-outline-dark" type="submit">
         +
       </button>
     </form>
@@ -63,13 +63,13 @@
         v-model="newComment.title"
         required
       />
-      <button class="btn btn-warning btn-outline-light text-dark" type="submit">
+      <button class="btn btn-warning btn-outline-dark" type="submit">
         +
       </button>
     </form>
     <div class="row justify-content-center" v-if="moveTaskForm">
       <div
-        class="border col-8 bg-orange rounded shadow action my-1"
+        class="border col-8 bg-orange text-dark rounded shadow action my-1"
         v-for="list in lists"
         :key="list.id"
         @click="moveTask({ id: list.id })"
@@ -173,6 +173,6 @@ export default {
   background-color: #00bc8c;
 }
 .bg-orange {
-  background-color: #fd7e14;
+  background-color: #b8c0a5;
 }
 </style>

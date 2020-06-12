@@ -14,7 +14,7 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarText">
+    <div class="collapse  navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li
           class="nav-item"
@@ -37,13 +37,17 @@
       </ul>
       <span class="navbar-text">
         <button
-          class="btn btn-success"
+          class="btn btn-success btn-outline-dark"
           @click="login"
           v-if="!$auth.isAuthenticated"
         >
           Login
         </button>
-        <button class="btn btn-danger" @click="showLogoutAlert" v-else>
+        <button
+          class="btn btn-danger btn-outline-dark"
+          @click="showLogoutAlert"
+          v-else
+        >
           logout
         </button>
       </span>

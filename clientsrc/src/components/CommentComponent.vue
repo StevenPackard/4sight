@@ -5,7 +5,7 @@
         <a
           @mouseover="commentDetails = true"
           @mouseleave="commentDetails = false"
-          class="btn dropdown dropdown-toggle text-dark"
+          class="btn dropdown dropdown-toggle text-dark text-wrap"
           href="#"
           role="button"
           id="dropdownMenuLink"
@@ -36,15 +36,12 @@
           v-model="comment.title"
           required
         />
-        <button
-          class="btn btn-success btn-outline-light text-dark"
-          type="submit"
-        >
+        <button class="btn btn-success btn-outline-dark" type="submit">
           +
         </button>
       </form>
-      <div v-if="commentDetails" class="col">
-        <p>{{ comment.creatorEmail }}</p>
+      <div v-if="commentDetails" class="col text-dark">
+        <p class="border-top">{{ comment.creatorEmail }}</p>
       </div>
     </div>
   </div>
@@ -81,9 +78,9 @@ export default {
         dangerMode: true,
       }).then((willDelete) => {
         if (willDelete) {
-          swal("Comment deleted!", {
-            icon: "success",
-          });
+          // swal("Comment deleted!", {
+          //   icon: "success",
+          // });
           this.deleteComment();
         }
       });
